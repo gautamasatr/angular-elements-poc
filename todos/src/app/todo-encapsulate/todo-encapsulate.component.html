@@ -1,0 +1,29 @@
+<div class="container-fluid overflow-hidden h-100 p-0" *ngIf="vm$|async as vm">
+  <div class="d-flex flex-column h-100">
+    <div class="d-flex flex-grow-0 border-bottom p-3">
+      <div class="row d-flex align-items-center w-100">
+        <div class="col"><h3>Todos</h3></div>
+        <div class="col-auto pe-0">
+          <button class="btn btn-sm btn-secondary" (click)="actionReload()">Reload</button>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-grow-1 overflow-auto">
+      <ng-container *ngIf="vm.todos.length === 0">
+        <span class="text-muted p-3">Todo is empty</span>
+      </ng-container>
+      <ng-container *ngIf="vm.todos.length > 0">
+        <ul class="list-group list-group-flush w-100">
+          <ng-container *ngFor="let todo of vm.todos">
+            <li class="list-group-item cursor-pointer" 
+              (click)="actionSelectTodo(todo)" 
+              [ngClass]="{'text-decoration-line-through text-muted':todo.completed, 'active':vm.selectedTodo?.id === todo?.id}"
+            >
+              {{todo.title}}
+            </li>
+          </ng-container>
+        </ul>
+      </ng-container>
+    </div>
+  </div>
+</div>
